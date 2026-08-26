@@ -11,24 +11,23 @@
 }
 
 .category-header {
-  display: flex;
-  align-items: center;
-  background-color: #ed6d17;
-  border-radius: 12px;
-  padding: 10px 20px;
-  margin-top: 28px;
-  margin-bottom: 20px;
-  width: 1440px;
+  width: 100dvw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50dvw;
+  margin-right: -50dvw;
+  box-sizing: border-box;
 }
 
 .category-inner {
   display: flex;
   align-items: center;
   gap: 16px;
-  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* 2. ICON REPARIERT (Kein padding-left: 360px mehr!) */
 .category-icon {
   width: 42px;
   height: 42px;
@@ -57,7 +56,6 @@
   font-size: 0.9rem;
 }
 
-/* 3. MENU ITEMS LISTE REPARIERT (Kein margin-left: 118px mehr!) */
 .menu-items {
   display: flex;
   flex-direction: column;
@@ -66,7 +64,6 @@
   padding: 0;
 }
 
-/* 4. MENU ITEM KARTEN REPARIERT (Flexibel statt 713px fest!) */
 .menu-item {
   display: flex;
   align-items: center;
