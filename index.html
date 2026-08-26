@@ -1,0 +1,93 @@
+<!-- @format -->
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>BurgerHouse – Bestellapp</title>
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles/fonts.css" />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/assets.css" />
+    <link rel="stylesheet" href="./styles/basket.css" />
+  </head>
+
+  <body>
+    <header class="page-header">
+      <nav class="navbar">
+        <img
+          class="nav-logo"
+          src="./assets/icons/Logo 01.png"
+          alt="Bestellapp Logo" />
+
+        <button class="burger-menu" type="button" aria-label="Menü öffnen">
+          <img class="burger-menu-icon" src="./assets/icons/menu.svg" alt="" />
+        </button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <img
+        class="hero-img"
+        src="./assets/img/header_photo.png"
+        alt="Restaurant Titelbild" />
+
+      <div class="restaurant-logo-circle">
+        <img
+          class="restaurant-logo"
+          src="./assets/icons/logo_burger.png"
+          alt="BurgerHouse Logo" />
+      </div>
+    </section>
+
+    <section class="restaurant-header-info">
+      <div class="restaurant-title-row">
+        <h1><span class="highlight-span">Burger</span>House</h1>
+
+        <div class="rating-stars">
+          <img src="./assets/icons/star.png" alt="Stern" />
+
+          <div class="rating-value">
+            <strong>4,1</strong>
+            <span class="review-count">(317)</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="restaurant-subtitle">
+        The best of Burgers, Pizza, and Greens, all in one great place.
+      </p>
+    </section>
+
+    <main class="main-layout">
+      <section class="order-layout">
+        <!-- Wird durch JavaScript gefüllt -->
+        <div id="menu" class="menu-container"></div>
+
+        <aside class="basket-wrapper">
+          <div class="basket">
+            <h2>Your Basket</h2>
+
+            <div id="basket-content"></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <div class="footer-content">
+        <span>© 2026 BurgerHouse</span>
+        <span>Imprint</span>
+        <span>Cookie Preferences</span>
+      </div>
+    </footer>
+
+    <script src="./scripts/db.js"></script>
+    <script src="./scripts/template.js"></script>
+    <script src="./scripts/basket.js"></script>
+    <script src="./scripts/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+/* @format */
+
+@font-face {
+  font-family: Palanquin-Regular;
+  src: url("../assets/fonts/Palanquin-Regular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Palanquin-Light;
+  src: url("../assets/fonts/Palanquin-Light.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Palanquin-Medium;
+  src: url("../assets/fonts/Palanquin-Medium.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Palanquin-SemiBold;
+  src: url("../assets/fonts/Palanquin-SemiBold.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Palanquin-Bold;
+  src: url("../assets/fonts/Palanquin-Bold.ttf");
+  font-display: swap;
+}

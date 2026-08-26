@@ -1,0 +1,294 @@
+/* @format */
+
+/* =========================
+   GLOBALE GRUNDLAGEN
+========================= */
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: #ffffff;
+  color: #1f1b1a;
+  font-family: Palanquin-Regular, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.page-header {
+  width: 100%;
+  background-color: #ed6d17;
+}
+
+.navbar {
+  width: min(100%, 1180px);
+  min-height: 58px;
+  margin: 0 auto;
+  padding: 8px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  height: 42px;
+  object-fit: contain;
+}
+
+.burger-menu {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.burger-menu-icon {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1);
+}
+
+/* =========================
+   HERO-BEREICH
+========================= */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 290px;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.restaurant-logo-circle {
+  position: absolute;
+  left: 50%;
+  bottom: -54px;
+
+  width: 118px;
+  height: 118px;
+
+  transform: translateX(-50%);
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+  border: 5px solid #ffffff;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.restaurant-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================
+   RESTAURANT-INFORMATIONEN
+========================= */
+
+.restaurant-header-info {
+  padding: 78px 20px 30px;
+  text-align: center;
+}
+
+.restaurant-title-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.restaurant-title-row h1 {
+  margin: 0;
+  font-family: Palanquin-Bold, Arial, sans-serif;
+  font-size: clamp(32px, 5vw, 46px);
+  line-height: 1;
+}
+
+.highlight-span {
+  color: #ed6d17;
+}
+
+.restaurant-subtitle {
+  margin: 12px 0 0;
+  color: #55504e;
+  font-family: Palanquin-Bold, Arial, sans-serif;
+  font-size: 18px;
+}
+
+/* =========================
+   BEWERTUNG
+========================= */
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 11px;
+  border-radius: 999px;
+
+  background-color: #ffffff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.rating-stars img {
+  width: 18px;
+  height: 18px;
+}
+
+.rating-value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.review-count {
+  color: #777777;
+  font-size: 13px;
+}
+
+/* =========================
+   HAUPTLAYOUT MIT GRID
+========================= */
+
+.main-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.order-layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Linke Spalte (Speisekarte) passt sich dynamisch an */
+.menu-container {
+  flex: 1;
+  min-width: 0; /* SEHR WICHTIG: Verhindert, dass Flex-Items den Container aufsprengen */
+}
+
+/* Rechte Spalte (Warenkorb) behält feste Breite */
+.basket-wrapper {
+  width: 320px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.page-footer {
+  width: 100%;
+  padding: 22px 24px;
+
+  background-color: #ed6d17;
+  color: #ffffff;
+
+  font-size: 12px;
+}
+
+.footer-content {
+  width: min(100%, 760px);
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+  gap: 44px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 950px) {
+  .order-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "menu"
+      "basket";
+  }
+
+  .basket-wrapper {
+    width: min(100%, 620px);
+    margin: 0 auto;
+  }
+}
+
+/* =========================
+   SMARTPHONE
+========================= */
+
+@media (max-width: 600px) {
+  .navbar {
+    padding-inline: 16px;
+  }
+
+  .hero {
+    height: 190px;
+  }
+
+  .restaurant-logo-circle {
+    width: 94px;
+    height: 94px;
+    bottom: -42px;
+  }
+
+  .restaurant-header-info {
+    padding-top: 62px;
+  }
+
+  .restaurant-subtitle {
+    font-size: 16px;
+  }
+
+  .main-layout {
+    padding-inline: 12px;
+  }
+
+  .footer-content {
+    gap: 18px;
+  }
+}
