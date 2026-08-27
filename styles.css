@@ -41,6 +41,7 @@ img {
 ========================= */
 
 .page-header {
+  height: 128px;
   width: 100%;
   background-color: #ed6d17;
 }
@@ -49,8 +50,7 @@ img {
   width: min(100%, 1180px);
   min-height: 58px;
   margin: 0 auto;
-  padding: 8px 24px;
-
+  padding: 24px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -220,22 +220,23 @@ img {
 ========================= */
 
 .page-footer {
+  font-family: Palanquin-Bold, Arial, sans-serif;
   width: 100%;
   padding: 22px 24px;
-
   background-color: #ed6d17;
   color: #ffffff;
-
-  font-size: 12px;
+  font-size: 18px;
+  height: 128px;
 }
 
 .footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: min(100%, 760px);
   margin: 0 auto;
-
-  display: flex;
   justify-content: center;
-  gap: 44px;
+  gap: 72px;
   flex-wrap: wrap;
 }
 

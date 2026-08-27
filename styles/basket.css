@@ -203,3 +203,9 @@
 .buy-button:active {
   transform: scale(0.98);
 }
+@media (max-width: 680px) {
+  .basket-wrapper {
+    width: 100%;
+    margin: 0 auto;
+  }
+}

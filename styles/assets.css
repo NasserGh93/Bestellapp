@@ -1,6 +1,9 @@
 /** @format */
 
-/* Fallback-Schriftarten ergänzt */
+/* ========================================
+   RESTAURANT INFO
+======================================== */
+
 .restaurant-subtitle {
   font-family: Palanquin-Bold, Arial, sans-serif;
   font-weight: 700;
@@ -10,172 +13,374 @@
   color: #5f5f5f;
 }
 
-.category-header {
-  width: 100dvw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50dvw;
-  margin-right: -50dvw;
+/* ========================================
+   CATEGORY HEADER
+======================================== */
+
+/*
+  Der komplette orange Balken.
+  Icon und Überschrift befinden sich innerhalb
+  dieses Elements.
+*/
+.category-header-menu {
+  width: 100%;
+  background-color: #ff6b00;
+  box-shadow: 0 0 0 100vmax #ff6b00;
+  clip-path: inset(0 -100vmax);
   box-sizing: border-box;
+  height: 91px;
+
+  margin: 0 0 20px 0;
 }
 
+/*
+  Begrenzt nur den INHALT des Balkens.
+  Der orange Hintergrund selbst bleibt 100% breit.
+*/
 .category-inner {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0 20px 0 0;
   display: flex;
   align-items: center;
   gap: 16px;
-  max-width: 1200px;
-  margin: 0 auto;
+
+  box-sizing: border-box;
 }
+
+/* Kategorie Icon */
 
 .category-icon {
-  width: 42px;
-  height: 42px;
-  object-fit: contain;
-  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  width: 88px;
+  height: 91px;
+  flex-shrink: 1;
 }
 
+/* Kategorie Titel */
+
 .category-title {
+  font-size: 40px;
+  font-family: Palanquin-Bold, Arial, sans-serif;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
 }
+
+/* Burger & Sandwiches / Pizza / Salad */
 
 .category-title h2 {
   font-family: Palanquin-Bold, Arial, sans-serif;
   font-weight: 700;
   font-size: 24px;
   line-height: 120%;
+
   color: #ffffff;
+
   margin: 0;
   padding: 0;
 }
 
-.category-title span {
+/* z.B. Pizza (30cm) */
+
+.category-subtitle {
   color: rgba(255, 255, 255, 0.85);
-  font-size: 0.9rem;
+  font-size: 20px;
 }
+
+/* ========================================
+   MENU CATEGORY
+======================================== */
+
+.menu-category {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ========================================
+   MENU ITEMS CONTAINER
+======================================== */
 
 .menu-items {
+  width: 100%;
+
   display: flex;
   flex-direction: column;
+
   gap: 16px;
+
   margin: 0;
   padding: 0;
+
+  box-sizing: border-box;
 }
 
+/* ========================================
+   EINZELNES GERICHT
+======================================== */
+
 .menu-item {
+  width: 100%;
+  min-height: 160px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 20px;
+
   padding: 18px 20px;
-  background: #fdeadc;
+
+  background-color: #fdeadc;
+
   border: 1px solid rgba(255, 107, 0, 0.16);
   border-radius: 24px;
+
   box-shadow: 0 12px 28px rgba(255, 107, 0, 0.12);
-  width: 100%; /* Passt sich exakt dem Platz links neben dem Warenkorb an */
-  min-height: 160px; /* flexibel statt starrer height: 180px */
+
   box-sizing: border-box;
 }
+
+/* ========================================
+   PRODUKTBILD
+======================================== */
 
 .menu-item-image {
   width: 140px;
   height: 120px;
+
   object-fit: cover;
+
   border-radius: 16px;
+
   flex-shrink: 0;
 }
+
+/* ========================================
+   PRODUKT INFORMATIONEN
+======================================== */
 
 .menu-item-details {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   flex: 1;
   min-width: 0;
+
   gap: 6px;
 }
 
+/* Produktname */
+
 .menu-item-details h3 {
   font-family: Palanquin-Bold, Arial, sans-serif;
-  margin: 0;
+
   font-size: 1.15rem;
+
   color: #1d1d1d;
+
+  margin: 0;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+/* Produktbeschreibung */
+
 .menu-item-details p {
   font-family: Palanquin-Light, Arial, sans-serif;
+
   font-size: 0.95rem;
-  margin: 0;
-  color: #5f5f5f;
   line-height: 1.5;
+
+  color: #5f5f5f;
+
+  margin: 0;
+
   display: -webkit-box;
+
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
   overflow: hidden;
 }
 
+/* ========================================
+   PREIS + BUTTON
+======================================== */
+
 .item-action-column {
+  min-width: 130px;
+
   display: flex;
   flex-direction: column;
+
   justify-content: space-between;
   align-items: flex-end;
+
   gap: 20px;
-  min-width: 130px;
+
   flex-shrink: 0;
 }
 
+/* Preis */
+
 .menu-item-price {
+  font-family: Palanquin-Bold, Arial, sans-serif;
+
   color: #1d1d1d;
+
   font-size: 1.1rem;
   font-weight: 700;
 }
 
+/* ========================================
+   ADD TO BASKET BUTTON
+======================================== */
+
 .menu-item-button {
   border: 1px solid #ff6b00;
-  background: #ffffff;
+
+  background-color: #ffffff;
   color: #ff6b00;
+
   border-radius: 999px;
+
   padding: 8px 16px;
+
+  font-family: Palanquin-Bold, Arial, sans-serif;
+
   font-weight: 700;
   font-size: 0.9rem;
+
   cursor: pointer;
+
   white-space: nowrap;
+
   transition:
-    background 0.2s ease,
+    background-color 0.2s ease,
     transform 0.2s ease;
 }
 
 .menu-item-button:hover {
-  background: #fff3e4;
+  background-color: #fff3e4;
+
   transform: translateY(-1px);
 }
 
 .menu-item-button.added {
-  background: #ffffff;
+  background-color: #ffffff;
+
   color: #ff6b00;
+
   border-color: #ff6b00;
 }
 
-/* RESPONSIVE ANPASSUNG */
+/* ========================================
+   RESPONSIVE
+======================================== */
+
 @media (max-width: 900px) {
+  .category-inner {
+    width: 90%;
+  }
+
+  .category-title h2 {
+    font-size: 22px;
+  }
+
+  .category-subtitle {
+    font-size: 18px;
+  }
+
   .menu-item {
-    flex-direction: column;
-    align-items: stretch;
+    gap: 16px;
+
+    padding: 16px;
   }
 
   .menu-item-image {
-    width: 100%;
-    height: 180px;
+    width: 120px;
+    height: 110px;
   }
 
   .item-action-column {
-    flex-direction: row;
-    justify-content: space-between;
+    min-width: 120px;
+
+    gap: 16px;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 680px) {
+  .category-inner {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
+    height: 120px;
+    margin: 70px 0 50px 0;
+    gap: 0;
+  }
+
+  .category-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .category-title h2 {
+    font-size: 20px;
+  }
+
+  .category-subtitle {
+    font-size: 16px;
+  }
+
+  .menu-item {
+    min-height: 140px;
+
+    gap: 12px;
+
+    padding: 14px;
+  }
+
+  .menu-item-image {
+    width: 100px;
+    height: 100px;
+
+    border-radius: 12px;
+  }
+
+  .menu-item-details {
+    gap: 4px;
+  }
+
+  .menu-item-details h3 {
+    font-size: 16px;
+  }
+
+  .menu-item-details p {
+    font-size: 14px;
+  }
+
+  .item-action-column {
+    min-width: 105px;
+
+    gap: 12px;
+  }
+
+  .menu-item-price {
+    font-size: 16px;
+  }
+
+  .menu-item-button {
+    padding: 7px 12px;
+
+    font-size: 13px;
   }
 }

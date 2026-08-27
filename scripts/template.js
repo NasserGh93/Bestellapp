@@ -1,6 +1,9 @@
 /** @format */
 
-// Formatiert Zahlen als EURO-Währung (z. B. 15.9 -> 15,90 €)
+// ========================================
+// PRICE
+// ========================================
+
 function formatPrice(price) {
   return price.toLocaleString("de-DE", {
     style: "currency",
@@ -8,7 +11,10 @@ function formatPrice(price) {
   });
 }
 
-// Erstellt das HTML für den Kategorie-Header separat
+// ========================================
+// CATEGORY HEADER
+// ========================================
+
 function categoryHeaderTemplate(category) {
   const subtitle = category.subtitle
     ? `<span class="category-subtitle">${category.subtitle}</span>`
@@ -17,39 +23,52 @@ function categoryHeaderTemplate(category) {
   return `
     <header class="category-header-menu">
       <div class="category-inner">
+
         <img
           class="category-icon"
           src="${category.icon}"
           alt=""
         />
+
         <div class="category-title">
           <h2>
             ${category.category}
             ${subtitle}
           </h2>
         </div>
+
       </div>
     </header>
   `;
 }
 
-// Erstellt das HTML für eine gesamte Kategorie (Header + Speisekarte)
+// ========================================
+// MENU CATEGORY
+// ========================================
+
 function menuCategoryTemplate(category) {
   return `
-    <section class="menu-category">
-      ${categoryHeaderTemplate(category)}
+    <section
+      class="menu-category"
+      data-category-id="${category.id}"
+    >
 
       <div class="menu-items">
         ${category.items.map(menuItemTemplate).join("")}
       </div>
+
     </section>
   `;
 }
 
-// Erstellt das HTML für ein einzelnes Gericht
+// ========================================
+// MENU ITEM
+// ========================================
+
 function menuItemTemplate(item) {
   return `
     <article class="menu-item">
+
       <img
         class="menu-item-image"
         src="${item.image}"
@@ -57,11 +76,19 @@ function menuItemTemplate(item) {
       />
 
       <div class="menu-item-details">
-        <h3>${item.name}</h3>
-        <p>${item.description}</p>
+
+        <h3>
+          ${item.name}
+        </h3>
+
+        <p>
+          ${item.description}
+        </p>
+
       </div>
 
       <div class="item-action-column">
+
         <span class="menu-item-price">
           ${formatPrice(item.price)}
         </span>
@@ -73,27 +100,37 @@ function menuItemTemplate(item) {
         >
           Add to basket
         </button>
+
       </div>
+
     </article>
   `;
 }
 
-// Erstellt das HTML für ein Element im Warenkorb
+// ========================================
+// BASKET ITEM
+// ========================================
+
 function basketItemTemplate(entry) {
   const itemTotal = entry.item.price * entry.quantity;
 
   return `
     <article class="basket-item">
+
       <div class="basket-item-top">
+
         <strong>
           ${entry.quantity} × ${entry.item.name}
         </strong>
+
         <span>
           ${formatPrice(itemTotal)}
         </span>
+
       </div>
 
       <div class="basket-item-controls">
+
         <button
           class="quantity-button"
           type="button"
@@ -122,12 +159,17 @@ function basketItemTemplate(entry) {
           data-remove-id="${entry.item.id}"
           aria-label="${entry.item.name} entfernen"
         ></button>
+
       </div>
+
     </article>
   `;
 }
 
-// Erstellt das HTML für den gesamten Warenkorb-Inhalt
+// ========================================
+// BASKET
+// ========================================
+
 function basketTemplate(entries, subtotal, deliveryFee, total) {
   if (entries.length === 0) {
     return `
@@ -143,6 +185,7 @@ function basketTemplate(entries, subtotal, deliveryFee, total) {
     </div>
 
     <div class="summary">
+
       <div class="summary-row">
         <span>Subtotal</span>
         <span>${formatPrice(subtotal)}</span>
@@ -164,6 +207,7 @@ function basketTemplate(entries, subtotal, deliveryFee, total) {
       >
         Buy now (${formatPrice(total)})
       </button>
+
     </div>
   `;
 }
