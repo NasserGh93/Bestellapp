@@ -90,7 +90,11 @@ function renderBasket() {
     button.textContent = "";
   });
 
-  const { subtotal, deliveryFee: basketDeliveryFee, total } = getBasketSummary();
+  const {
+    subtotal,
+    deliveryFee: basketDeliveryFee,
+    total,
+  } = getBasketSummary();
   const markup = basketTemplate(basket, subtotal, basketDeliveryFee, total);
 
   [basketContent, mobileBasketContent].filter(Boolean).forEach((element) => {
