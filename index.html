@@ -24,9 +24,6 @@
           src="./assets/icons/Logo 01.png"
           alt="Bestellapp Logo" />
 
-        <button class="burger-menu" type="button" aria-label="Menü öffnen">
-          <img class="burger-menu-icon" src="./assets/icons/menu.svg" alt="" />
-        </button>
       </nav>
     </header>
 
@@ -105,34 +102,36 @@
       </button>
     </nav>
 
-    <div
+    <dialog
       id="mobile-basket-dialog"
       class="mobile-basket-dialog"
-      aria-modal="true"
-      role="dialog"
-      aria-hidden="true">
+      aria-label="Dein Warenkorb"
+      tabindex="-1">
       <div class="mobile-basket-panel">
         <button
           class="mobile-basket-close"
+          data-dialog-close
+          autofocus
           type="button"
           aria-label="Warenkorb schließen">
           ×
         </button>
         <div id="mobile-basket-content"></div>
       </div>
-    </div>
+    </dialog>
 
-    <div
+    <dialog
       id="order-confirmation-modal"
       class="order-confirmation-modal"
-      aria-live="polite"
-      aria-modal="true"
-      role="dialog">
+      aria-labelledby="order-confirmation-title"
+      aria-describedby="order-confirmation-description">
       <div class="order-confirmation-dialog">
         <button
           class="order-confirmation-close"
+          data-dialog-close
+          autofocus
           type="button"
-          aria-label="Close confirmation">
+          aria-label="Bestätigung schließen">
           ×
         </button>
         <img
@@ -140,17 +139,15 @@
           src="./assets/icons/ChatGPT%20Image%20Nov%2024,%202025,%2011_51_33%20AM%201.svg"
           alt="ChatGPT illustration" />
         <p class="order-confirmation-text">
-          <span>Order Confirmed!</span>
-          <span>Your Food is on the Way!</span>
+          <span id="order-confirmation-title">Testbestellung erfolgreich!</span>
+          <span id="order-confirmation-description">Es wird keine echte Bestellung versendet.</span>
         </p>
       </div>
-    </div>
+    </dialog>
 
     <footer class="page-footer">
       <div class="footer-content">
         <span>© 2026 BurgerHouse</span>
-        <span>Imprint</span>
-        <span>Cookie Preferences</span>
       </div>
     </footer>
 

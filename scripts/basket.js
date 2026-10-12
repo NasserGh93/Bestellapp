@@ -11,16 +11,13 @@ function findMenuItemById(itemId) {
       return item;
     }
   }
-
   return null;
 }
 
 function getBasketSummary() {
   const subtotal = basket.reduce(
-    (sum, entry) => sum + entry.item.price * entry.quantity,
-    0,
+    (sum, entry) => sum + entry.item.price * entry.quantity, 0,
   );
-
   return {
     subtotal,
     deliveryFee,
@@ -28,198 +25,187 @@ function getBasketSummary() {
   };
 }
 
+function increaseBasketItem(item) {
+  const entry = basket.find((entry) => entry.item.id === item.id);
+  if (entry) {
+    entry.quantity += 1;
+  } else {
+    basket.push({ item, quantity: 1 });
+  }
+}
+
+function removeBasketItem(itemId) {
+  basket = basket.filter((entry) => entry.item.id !== itemId);
+}
+
+function decreaseBasketItem(item) {
+  const entry = basket.find((entry) => entry.item.id === item.id);
+  if (!entry) {
+    return;
+  }
+  entry.quantity -= 1;
+  if (entry.quantity === 0) {
+    removeBasketItem(item.id);
+  }
+}
+
 function updateBasket(itemId, action) {
   const item = findMenuItemById(itemId);
-
-  if (!item) {
-    return;
+  const actions = {
+    add: increaseBasketItem,
+    increase: increaseBasketItem,
+    decrease: decreaseBasketItem,
+    remove: (item) => removeBasketItem(item.id),
+  };
+  if (item && Object.hasOwn(actions, action)) {
+    actions[action](item);
+    renderBasket();
   }
-
-  const existingEntry = basket.find((entry) => entry.item.id === itemId);
-
-  if (action === "add" || action === "increase") {
-    if (existingEntry) {
-      existingEntry.quantity += 1;
-    } else {
-      basket.push({ item, quantity: 1 });
-    }
-  } else if (action === "decrease") {
-    if (!existingEntry) {
-      return;
-    }
-
-    existingEntry.quantity -= 1;
-
-    if (existingEntry.quantity <= 0) {
-      basket = basket.filter((entry) => entry.item.id !== itemId);
-    }
-  } else if (action === "remove") {
-    basket = basket.filter((entry) => entry.item.id !== itemId);
-  } else {
-    return;
-  }
-
-  renderBasket();
 }
 
 function addToBasket(itemId) {
   updateBasket(itemId, "add");
 }
 
-function renderBasket() {
-  const basketContent = document.getElementById("basket-content");
-  const mobileBasketContent = document.getElementById("mobile-basket-content");
-  const mobileBasketCount = document.getElementById("mobile-basket-count");
+function getBasketContainers() {
+  return [
+    document.getElementById("basket-content"),
+    document.getElementById("mobile-basket-content"),
+  ].filter(Boolean);
+}
 
-  const totalItems = basket.reduce((sum, entry) => sum + entry.quantity, 0);
-
-  if (mobileBasketCount) {
-    mobileBasketCount.textContent = String(totalItems);
+function updateBasketCounts() {
+  const count = document.getElementById("mobile-basket-count");
+  if (count) {
+    count.textContent = String(basket.reduce((sum, entry) => sum + entry.quantity, 0));
   }
+  document.querySelectorAll("[data-count-id]").forEach(updateMenuItemCount);
+}
 
-  const countButtons = document.querySelectorAll("[data-count-id]");
-  countButtons.forEach((button) => {
-    const itemId = Number(button.dataset.countId);
-    const itemEntry = basket.find((entry) => entry.item.id === itemId);
+function updateMenuItemCount(element) {
+  const itemId = Number(element.dataset.countId);
+  const entry = basket.find((entry) => entry.item.id === itemId);
+  element.textContent = entry ? String(entry.quantity) : "";
+}
 
-    if (itemEntry && itemEntry.quantity > 0) {
-      button.textContent = String(itemEntry.quantity);
-      return;
-    }
+function restoreBasketFocus(container, action, id) {
+  const buttons = container.querySelectorAll("[data-action]");
+  const matching = [...buttons].find((button) =>
+    button.dataset.action === action && button.dataset.id === id,
+  );
+  const target = matching || buttons[0] || container.closest("dialog");
+  if (target) {
+    target.focus();
+  }
+}
 
-    button.textContent = "";
-  });
+function renderBasketContainer(container, markup) {
+  const active = document.activeElement;
+  const shouldRestore = container.contains(active);
+  const { action, id } = active.dataset;
+  container.innerHTML = markup;
+  if (shouldRestore) {
+    restoreBasketFocus(container, action, id);
+  }
+}
 
-  const {
-    subtotal,
-    deliveryFee: basketDeliveryFee,
-    total,
-  } = getBasketSummary();
-  const markup = basketTemplate(basket, subtotal, basketDeliveryFee, total);
+function renderBasket() {
+  const { subtotal, deliveryFee, total } = getBasketSummary();
+  const markup = basketTemplate(basket, subtotal, deliveryFee, total);
+  getBasketContainers().forEach((container) => renderBasketContainer(container, markup));
+  updateBasketCounts();
+}
 
-  [basketContent, mobileBasketContent].filter(Boolean).forEach((element) => {
-    element.innerHTML = markup;
-  });
+function openDialog(dialogId) {
+  const dialog = document.getElementById(dialogId);
+  if (!dialog || dialog.open) {
+    return;
+  }
+  dialog.classList.add("visible");
+  dialog.showModal();
+  document.body.classList.add("dialog-open");
+}
+
+function closeDialog(dialogId) {
+  const dialog = document.getElementById(dialogId);
+  if (dialog && dialog.open) {
+    dialog.close();
+  }
+}
+
+function handleDialogClose(event) {
+  event.target.classList.remove("visible");
+  if (!document.querySelector("dialog[open]")) {
+    document.body.classList.remove("dialog-open");
+  }
 }
 
 function showOrderConfirmation() {
-  const modal = document.getElementById("order-confirmation-modal");
-  if (!modal) {
-    return;
-  }
-
-  modal.classList.add("visible");
+  openDialog("order-confirmation-modal");
 }
 
 function hideOrderConfirmation() {
-  const modal = document.getElementById("order-confirmation-modal");
-  if (!modal) {
-    return;
-  }
+  closeDialog("order-confirmation-modal");
+}
 
-  modal.classList.remove("visible");
+function openMobileBasket() {
+  openDialog("mobile-basket-dialog");
+}
+
+function closeMobileBasket() {
+  closeDialog("mobile-basket-dialog");
 }
 
 function confirmOrder() {
   if (basket.length === 0) {
     return;
   }
-
+  closeMobileBasket();
   basket = [];
   renderBasket();
   showOrderConfirmation();
 }
 
-function bindConfirmationModalEvents() {
-  const modal = document.getElementById("order-confirmation-modal");
-  if (!modal) {
+function bindDialogEvents(dialogId, closeHandler) {
+  const dialog = document.getElementById(dialogId);
+  if (!dialog) {
     return;
   }
-
-  const closeButton = modal.querySelector(".order-confirmation-close");
-  if (closeButton) {
-    closeButton.addEventListener("click", hideOrderConfirmation);
-  }
-
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      hideOrderConfirmation();
+  dialog.querySelector("[data-dialog-close]").addEventListener("click", closeHandler);
+  dialog.addEventListener("close", handleDialogClose);
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) {
+      closeHandler();
     }
   });
 }
 
-function openMobileBasket() {
-  const dialog = document.getElementById("mobile-basket-dialog");
-
-  if (!dialog) {
-    return;
-  }
-
-  dialog.classList.add("visible");
-  dialog.setAttribute("aria-hidden", "false");
-}
-
-function closeMobileBasket() {
-  const dialog = document.getElementById("mobile-basket-dialog");
-
-  if (!dialog) {
-    return;
-  }
-
-  dialog.classList.remove("visible");
-  dialog.setAttribute("aria-hidden", "true");
-}
-
 function handleBasketClick(event) {
-  const actionButton = event.target.closest("[data-action]");
-  if (!actionButton) {
+  const button = event.target.closest("[data-action]");
+  if (!button) {
     return;
   }
-
-  const { action, id } = actionButton.dataset;
-
+  const { action, id } = button.dataset;
   if (action === "buy") {
     confirmOrder();
-    closeMobileBasket();
-    return;
+  } else {
+    updateBasket(Number(id), action);
   }
+}
 
-  updateBasket(Number(id), action);
+function bindMobileBasketEvents() {
+  const toggle = document.getElementById("mobile-basket-toggle");
+  if (toggle) {
+    toggle.addEventListener("click", openMobileBasket);
+  }
+  bindDialogEvents("mobile-basket-dialog", closeMobileBasket);
+  bindDialogEvents("order-confirmation-modal", hideOrderConfirmation);
 }
 
 function initBasket() {
-  const basketContent = document.getElementById("basket-content");
-  const mobileBasketContent = document.getElementById("mobile-basket-content");
-  const mobileBasketToggle = document.getElementById("mobile-basket-toggle");
-  const mobileBasketClose = document.querySelector(".mobile-basket-close");
-  const mobileBasketDialog = document.getElementById("mobile-basket-dialog");
-
-  if (!basketContent && !mobileBasketContent) {
-    return;
-  }
-
-  bindConfirmationModalEvents();
-
-  if (mobileBasketToggle) {
-    mobileBasketToggle.addEventListener("click", openMobileBasket);
-  }
-
-  if (mobileBasketClose) {
-    mobileBasketClose.addEventListener("click", closeMobileBasket);
-  }
-
-  if (mobileBasketDialog) {
-    mobileBasketDialog.addEventListener("click", (event) => {
-      if (event.target === mobileBasketDialog) {
-        closeMobileBasket();
-      }
-    });
-  }
-
-  const basketContainers = [basketContent, mobileBasketContent].filter(Boolean);
-  basketContainers.forEach((container) => {
+  getBasketContainers().forEach((container) => {
     container.addEventListener("click", handleBasketClick);
   });
-
+  bindMobileBasketEvents();
   renderBasket();
 }

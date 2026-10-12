@@ -89,7 +89,7 @@
   justify-content: center;
   padding: 20px 12px 70px;
   background: rgba(42, 39, 37, 0.62);
-  z-index: 1200;
+  z-index: 1300;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -169,7 +169,7 @@
   justify-content: center;
   padding: 20px;
   background: rgba(54, 53, 52, 0.8);
-  z-index: 999;
+  z-index: 1400;
 }
 
 .order-confirmation-modal.visible {
@@ -278,14 +278,14 @@
 .basket-item-controls {
   margin-top: 8px;
   display: grid;
-  grid-template-columns: 24px 24px 24px 1fr 27px;
+  grid-template-columns: 44px 24px 44px minmax(0, 1fr) 44px;
   gap: 8px;
   align-items: center;
 }
 
 .quantity-button {
-  width: 24px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: none;
   border-radius: 50%;
@@ -314,8 +314,9 @@
 ========================= */
 
 .remove-item {
-  width: 27px;
-  height: 27px;
+  grid-column: 5;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: none;
   background-color: transparent;
@@ -395,6 +396,10 @@
 }
 
 @media (max-width: 680px) {
+  body {
+    padding-bottom: calc(73px + env(safe-area-inset-bottom));
+  }
+
   .basket-wrapper {
     display: none;
     width: 100%;
@@ -404,4 +409,22 @@
   .mobile-bottom-nav {
     display: flex;
   }
+}
+
+/* Native Dialoge übernehmen Fokusbegrenzung und Escape-Bedienung. */
+dialog {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  height: 100%;
+  margin: 0;
+  border: none;
+}
+
+dialog:not([open]) {
+  display: none;
+}
+
+body.dialog-open {
+  overflow: hidden;
 }

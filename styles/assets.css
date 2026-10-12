@@ -84,6 +84,7 @@
   width: 100%;
 
   margin-bottom: 40px;
+  scroll-margin-top: 20px;
 }
 
 /* ========================================
@@ -356,11 +357,14 @@
   }
 
   .menu-item-details {
+    width: 100%;
     padding: 0 14px;
     gap: 8px;
   }
 
   .menu-item-details h3 {
+    white-space: normal;
+    overflow-wrap: anywhere;
     font-size: 16px;
     line-height: 1.2;
   }

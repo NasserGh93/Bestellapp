@@ -1,5 +1,5 @@
 /** @format */
-/* global menuData, categoryHeaderTemplate, menuCategoryTemplate, addToBasket, initBasket */
+/* global menuData, categoryNavigationTemplate, menuCategoryTemplate, addToBasket, initBasket */
 
 // ========================================
 // MENU RENDERING
@@ -12,19 +12,7 @@ function renderCategoryNavigation() {
     return;
   }
 
-  nav.innerHTML = menuData
-    .map(
-      (category) => `
-        <button
-          class="category-nav-button"
-          type="button"
-          data-target="category-${category.id}"
-        >
-          ${category.category}
-        </button>
-      `,
-    )
-    .join("");
+  nav.innerHTML = menuData.map(categoryNavigationTemplate).join("");
 }
 
 function handleCategoryNavigationClick(event) {
@@ -35,7 +23,6 @@ function handleCategoryNavigationClick(event) {
   }
 
   const section = document.getElementById(navButton.dataset.target);
-
   if (!section) {
     return;
   }
@@ -50,14 +37,7 @@ function renderMenu() {
     return;
   }
 
-  menuContainer.innerHTML = menuData
-    .map((category) => {
-      return `
-        ${categoryHeaderTemplate(category)}
-        ${menuCategoryTemplate(category)}
-      `;
-    })
-    .join("");
+  menuContainer.innerHTML = menuData.map(menuCategoryTemplate).join("");
 
   renderCategoryNavigation();
 }
@@ -85,13 +65,11 @@ function handleMenuClick(event) {
 function initMenu() {
   const menuContainer = document.getElementById("menu");
   const categoryNav = document.getElementById("category-nav");
-
   if (!menuContainer) {
     return;
   }
 
   menuContainer.addEventListener("click", handleMenuClick);
-
   if (categoryNav) {
     categoryNav.addEventListener("click", handleCategoryNavigationClick);
   }
