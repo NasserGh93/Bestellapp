@@ -1,8 +1,47 @@
 /** @format */
+/* global menuData, categoryHeaderTemplate, menuCategoryTemplate, addToBasket, initBasket */
 
 // ========================================
 // MENU RENDERING
 // ========================================
+
+function renderCategoryNavigation() {
+  const nav = document.getElementById("category-nav");
+
+  if (!nav) {
+    return;
+  }
+
+  nav.innerHTML = menuData
+    .map(
+      (category) => `
+        <button
+          class="category-nav-button"
+          type="button"
+          data-target="category-${category.id}"
+        >
+          ${category.category}
+        </button>
+      `,
+    )
+    .join("");
+}
+
+function handleCategoryNavigationClick(event) {
+  const navButton = event.target.closest("[data-target]");
+
+  if (!navButton) {
+    return;
+  }
+
+  const section = document.getElementById(navButton.dataset.target);
+
+  if (!section) {
+    return;
+  }
+
+  section.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 function renderMenu() {
   const menuContainer = document.getElementById("menu");
@@ -19,6 +58,8 @@ function renderMenu() {
       `;
     })
     .join("");
+
+  renderCategoryNavigation();
 }
 
 // ========================================
@@ -43,12 +84,17 @@ function handleMenuClick(event) {
 
 function initMenu() {
   const menuContainer = document.getElementById("menu");
+  const categoryNav = document.getElementById("category-nav");
 
   if (!menuContainer) {
     return;
   }
 
   menuContainer.addEventListener("click", handleMenuClick);
+
+  if (categoryNav) {
+    categoryNav.addEventListener("click", handleCategoryNavigationClick);
+  }
 
   renderMenu();
 }

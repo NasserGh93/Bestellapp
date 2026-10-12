@@ -45,7 +45,7 @@ const menuData = [
     id: 2,
     category: "Pizza",
     subtitle: "(30cm)",
-    icon: "./assets/icons/pizza.svg",
+    icon: "./assets/icons/Pizza.svg",
 
     items: [
       {
@@ -86,7 +86,7 @@ const menuData = [
   {
     id: 3,
     category: "Salad",
-    icon: "./assets/icons/salad.svg",
+    icon: "./assets/icons/Salad.svg",
 
     items: [
       {

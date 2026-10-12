@@ -2,3 +2,5 @@ agents.md
 .vscode
 node_modules
 /Docs
+.DS_Store
+eslint.config.js

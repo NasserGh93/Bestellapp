@@ -1,19 +1,6 @@
 /** @format */
 
 /* ========================================
-   RESTAURANT INFO
-======================================== */
-
-.restaurant-subtitle {
-  font-family: Palanquin-Bold, Arial, sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 120%;
-  text-align: center;
-  color: #5f5f5f;
-}
-
-/* ========================================
    CATEGORY HEADER
 ======================================== */
 
@@ -27,8 +14,7 @@
   background-color: #ff6b00;
   box-shadow: 0 0 0 100vmax #ff6b00;
   clip-path: inset(0 -100vmax);
-  box-sizing: border-box;
-  height: 91px;
+  padding: 20px 0;
 
   margin: 0 0 20px 0;
 }
@@ -41,12 +27,9 @@
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px 0 20px 0 0;
   display: flex;
   align-items: center;
   gap: 16px;
-
-  box-sizing: border-box;
 }
 
 /* Kategorie Icon */
@@ -57,6 +40,8 @@
   width: 88px;
   height: 91px;
   flex-shrink: 1;
+
+  object-fit: contain;
 }
 
 /* Kategorie Titel */
@@ -87,6 +72,8 @@
 .category-subtitle {
   color: rgba(255, 255, 255, 0.85);
   font-size: 20px;
+
+  margin-left: 8px;
 }
 
 /* ========================================
@@ -95,7 +82,8 @@
 
 .menu-category {
   width: 100%;
-  box-sizing: border-box;
+
+  margin-bottom: 40px;
 }
 
 /* ========================================
@@ -112,8 +100,6 @@
 
   margin: 0;
   padding: 0;
-
-  box-sizing: border-box;
 }
 
 /* ========================================
@@ -138,8 +124,6 @@
   border-radius: 24px;
 
   box-shadow: 0 12px 28px rgba(255, 107, 0, 0.12);
-
-  box-sizing: border-box;
 }
 
 /* ========================================
@@ -155,6 +139,14 @@
   border-radius: 16px;
 
   flex-shrink: 0;
+
+  font-family: Palanquin-Bold, Arial, sans-serif;
+  margin: 0;
+  font-size: 1.15rem;
+  color: #1d1d1d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ========================================
@@ -263,6 +255,12 @@
   transition:
     background-color 0.2s ease,
     transform 0.2s ease;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .menu-item-button:hover {
@@ -297,6 +295,8 @@
   }
 
   .menu-item {
+    flex-direction: column;
+    overflow: hidden;
     gap: 16px;
     padding: 16px;
   }
@@ -306,7 +306,13 @@
     height: 110px;
   }
 
+  .menu-item-details {
+    padding: 0 14px;
+  }
+
   .item-action-column {
+    width: 100%;
+    padding: 0 14px 14px;
     min-width: 120px;
     gap: 16px;
   }
@@ -318,12 +324,8 @@
 
 @media (max-width: 710px) {
   .category-inner {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 120px;
-    margin: 70px 0 50px 0;
-    gap: 0;
+    gap: 8px;
   }
 
   .category-icon {

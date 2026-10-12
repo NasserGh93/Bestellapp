@@ -19,7 +19,129 @@
   border-radius: 18px;
   background-color: #33302f;
   color: #ffffff;
-  box-sizing: border-box;
+}
+
+.mobile-bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(28, 27, 26, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1200;
+}
+
+.mobile-nav-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: none;
+  background: transparent;
+  color: #f9f5f1;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.mobile-nav-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.mobile-nav-button:active {
+  opacity: 0.7;
+}
+
+.mobile-basket-button {
+  color: #ffffff;
+}
+
+.mobile-basket-count {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #ed6d17;
+  color: #ffffff;
+  font-size: 11px;
+  line-height: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.mobile-basket-dialog {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  padding: 20px 12px 70px;
+  background: rgba(42, 39, 37, 0.62);
+  z-index: 1200;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 350ms ease,
+    visibility 0s linear 350ms;
+}
+
+.mobile-basket-dialog.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.mobile-basket-panel {
+  position: relative;
+  width: min(100%, 480px);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 50px 14px 12px;
+  border-radius: 20px 20px 0 0;
+  background: #33302f;
+  color: #ffffff;
+  transform: translateY(36px);
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-basket-dialog.visible .mobile-basket-panel {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-basket-dialog,
+  .mobile-basket-panel {
+    transition-duration: 0.01ms;
+  }
+}
+
+.mobile-basket-close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .basket h2 {
@@ -266,9 +388,20 @@
 .buy-button:active {
   transform: scale(0.98);
 }
+@media (max-width: 950px) {
+  .basket-wrapper {
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 680px) {
   .basket-wrapper {
+    display: none;
     width: 100%;
     margin: 0 auto;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
   }
 }

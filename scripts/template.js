@@ -49,8 +49,8 @@ function categoryHeaderTemplate(category) {
 function menuCategoryTemplate(category) {
   return `
     <section
+      id="category-${category.id}"
       class="menu-category"
-      data-category-id="${category.id}"
     >
 
       <div class="menu-items">
@@ -98,7 +98,8 @@ function menuItemTemplate(item) {
           type="button"
           data-add-id="${item.id}"
         >
-          Add to basket
+          <span>Add to basket</span>
+          <span class="menu-item-count" data-count-id="${item.id}"></span>
         </button>
 
       </div>
@@ -134,7 +135,8 @@ function basketItemTemplate(entry) {
         <button
           class="quantity-button"
           type="button"
-          data-decrease-id="${entry.item.id}"
+          data-action="decrease"
+          data-id="${entry.item.id}"
           aria-label="Menge verringern"
         >
           −
@@ -147,7 +149,8 @@ function basketItemTemplate(entry) {
         <button
           class="quantity-button"
           type="button"
-          data-increase-id="${entry.item.id}"
+          data-action="increase"
+          data-id="${entry.item.id}"
           aria-label="Menge erhöhen"
         >
           +
@@ -156,7 +159,8 @@ function basketItemTemplate(entry) {
         <button
           class="remove-item"
           type="button"
-          data-remove-id="${entry.item.id}"
+          data-action="remove"
+          data-id="${entry.item.id}"
           aria-label="${entry.item.name} entfernen"
         ></button>
 
@@ -204,6 +208,7 @@ function basketTemplate(entries, subtotal, deliveryFee, total) {
       <button
         class="buy-button"
         type="button"
+        data-action="buy"
       >
         Buy now (${formatPrice(total)})
       </button>
