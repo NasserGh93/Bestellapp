@@ -43,7 +43,7 @@ img {
 ========================= */
 
 .page-header {
-  height: 128px;
+  /*height: 128px;*/
   width: 100%;
   background-color: #ed6d17;
 }
