@@ -5,7 +5,8 @@
 ========================= */
 
 body {
-  margin: 0;
+  margin: 0 auto;
+  max-width: 1440px;
   min-width: 320px;
   background-color: #ffffff;
   color: #1d1d1d;
@@ -46,10 +47,12 @@ img {
   /*height: 128px;*/
   width: 100%;
   background-color: #ed6d17;
+  box-shadow: 0 0 0 100vmax #ed6d17;
+  clip-path: inset(0 -100vmax);
 }
 
 .navbar {
-  width: min(100%, 1180px);
+  width: min(100%, 1440px);
   min-height: 58px;
   margin: 0 auto;
   padding: 24px;
@@ -193,7 +196,7 @@ img {
 ========================= */
 
 .main-layout {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 20px 40px;
 }
@@ -202,7 +205,7 @@ img {
   display: flex;
   gap: 32px;
   align-items: flex-start;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -222,6 +225,8 @@ img {
   width: 100%;
   padding: 22px 24px;
   background-color: #ed6d17;
+  box-shadow: 0 0 0 100vmax #ed6d17;
+  clip-path: inset(0 -100vmax);
   color: #ffffff;
   font-size: 18px;
   height: 128px;
@@ -230,7 +235,7 @@ img {
 .footer-content {
   display: flex;
   align-items: center;
-  width: min(100%, 760px);
+  width: min(100%, 1440px);
   margin: 0 auto;
   justify-content: center;
   gap: 72px;
