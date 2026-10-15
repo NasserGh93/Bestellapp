@@ -4,6 +4,29 @@
 let basket = [];
 const deliveryFee = 4.99;
 
+function saveBasketToLocalStorage() {
+  try {
+    localStorage.setItem("burgerhouse_basket", JSON.stringify(basket));
+  } catch (error) {
+    console.warn("Der Warenkorb konnte nicht gespeichert werden.", error);
+  }
+}
+
+function loadBasketFromLocalStorage() {
+  try {
+    const stored = localStorage.getItem("burgerhouse_basket");
+    if (!stored) return;
+    const entries = JSON.parse(stored);
+    if (!Array.isArray(entries)) return;
+    basket = entries.filter((entry) => entry && entry.item &&
+      Number.isInteger(entry.quantity) && entry.quantity > 0 &&
+      Number.isFinite(entry.item.price) && entry.item.price >= 0 &&
+      findMenuItemById(entry.item.id));
+  } catch (error) {
+    console.warn("Der Warenkorb konnte nicht geladen werden.", error);
+  }
+}
+
 function findMenuItemById(itemId) {
   for (const category of menuData) {
     const item = category.items.find((menuItem) => menuItem.id === itemId);
@@ -59,6 +82,7 @@ function updateBasket(itemId, action) {
   };
   if (item && Object.hasOwn(actions, action)) {
     actions[action](item);
+    saveBasketToLocalStorage();
     renderBasket();
   }
 }
@@ -162,6 +186,7 @@ function confirmOrder() {
   }
   closeMobileBasket();
   basket = [];
+  saveBasketToLocalStorage();
   renderBasket();
   showOrderConfirmation();
 }
@@ -203,6 +228,7 @@ function bindMobileBasketEvents() {
 }
 
 function initBasket() {
+  loadBasketFromLocalStorage();
   getBasketContainers().forEach((container) => {
     container.addEventListener("click", handleBasketClick);
   });
